@@ -20,34 +20,43 @@
         die('Erreur : ' . $e->getMessage());
     }
 
-    $reponse = $bdd->query('SELECT RAP_NUM FROM rapport_visite');
-
+    $reponse = $bdd->query('SELECT * FROM rapport_visite');
+    $reponseune = $bdd->query('SELECT * FROM rapport_visite LIMIT 1');
+    while ($data = $reponseune->fetch()) {
+        $valeurDate = $data["RAP_DATE"];
+        $valeurBilan = $data["RAP_BILAN"];
+    }
     ?>
-
+    
+           
     <form action="Rendus.php" method="post">
-    <label for="numero_rapport">Numero Rapport</label>
+        <label for="numero_rapport">Numero Rapport</label>
         <select name="numero_rapport" id="pet-select">
-            <?php 
-            
-        while ($data = $reponse->fetch()) {
-            echo "<option>" . $data["RAP_NUM"] . "</option>";
-        }    
-            
+            <?php
+            while ($data = $reponse->fetch()) {
+                echo "<option>" . $data["RAP_NUM"] . "</option>";
+            }
             
             ?>
         </select>
         <!-- Date -->
+
         <label for="date_rapport">Date : </label>
-        <input type="text" name="date_rapport">
+        <?php
+        echo "<input type='text' name='date_rapport' value='" . strval($valeurDate) . "'>";
+        ?>
         <!-- Practicien -->
         <label for="practicien">Practicien :</label>
         <input type="text" name="practicien">
+        
         <!-- Motif -->
         <label for="motif">Motif Visite : </label>
         <input type="text" name="motif">
         <!-- Bilan -->
         <label for="bilan">Bilan : </label>
-        <textarea name="bilan" id="bilan"></textarea>
+        <?php
+        echo "<textarea type='text' name='bilan'>".$valeurBilan."</textarea>";
+        ?>
         <!-- Offre d'échantillion -->
         <label for="offreEchan">Offre echantillion : </label>
         <input type="text" name="offreEchan">
