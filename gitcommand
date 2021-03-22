@@ -1,0 +1,5 @@
+git add .
+git commit -m "Le nom du commit"
+git push 
+
+git status // Savoir sur quelle branche je me trouve
