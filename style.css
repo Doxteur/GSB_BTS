@@ -1,0 +1,50 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: rgb(1, 1, 44);
+}
+
+#header {
+    margin-right: 15px;
+    height: 80px;
+    width: 100%;
+    background-color: white;
+    vertical-align: middle;
+}
+
+ul {
+    right: 100;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+li {
+    margin-top: 10px;
+    float: right;
+    /*pour IE*/
+}
+
+ul li a {
+    font-size: 25px;
+    display: block;
+    float: right;
+    width: 12, 5%;
+    color: #80A2CD;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px;
+}
+
+#Login {
+    background-color: #368eb2;
+    margin-right: 15px;
+    color: white;
+}
+
+ul li a:hover {
+    color: red;
+}
