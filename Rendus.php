@@ -11,9 +11,31 @@
 
 <body>
 
+
+    <?php
+
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+    $reponse = $bdd->query('SELECT RAP_NUM FROM rapport_visite');
+
+    ?>
+
     <form action="Rendus.php" method="post">
-        <label for="numero_rapport">Numero Rapport : </label>
-        <input type="text" name="nymero_rapport">
+    <label for="numero_rapport">Numero Rapport</label>
+        <select name="numero_rapport" id="pet-select">
+            <?php 
+            
+        while ($data = $reponse->fetch()) {
+            echo "<option>" . $data["RAP_NUM"] . "</option>";
+        }    
+            
+            
+            ?>
+        </select>
         <!-- Date -->
         <label for="date_rapport">Date : </label>
         <input type="text" name="date_rapport">
@@ -31,28 +53,6 @@
         <input type="text" name="offreEchan">
 
     </form>
-
-<?php  
-    
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-
-    $reponse = $bdd->query('SELECT RAP_NUM FROM rapport_visite');
-
-    while ($data = $reponse->fetch()) {
-        echo nl2br ($data["RAP_NUM"]);
-    }
-
-
-
-
-
-
-
-?>
 
 
 </body>
