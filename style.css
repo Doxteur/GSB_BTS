@@ -3,10 +3,6 @@
     padding: 0px;
 }
 
-body {
-    background-color: rgb(1, 1, 44);
-}
-
 #header {
     margin-right: 15px;
     height: 80px;
@@ -40,6 +36,12 @@ ul li a {
 }
 
 #Login {
+    background-color: #368eb2;
+    margin-right: 15px;
+    color: white;
+}
+
+.Accueil {
     background-color: #368eb2;
     margin-right: 15px;
     color: white;

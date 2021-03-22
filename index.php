@@ -12,10 +12,10 @@
     <div id="header">
         <ul>
             <li><a id="Login" href="#">Login</a></li>
-            <li><a href="#">Médicament</a></li>
-            <li><a href="#">Practiciens</a></li>
-            <li><a href="#">Visiteurs</a></li>
-            <li><a href="#">Comptes-Rendus</a></li>
+            <li><a href="Medicaments.php">Médicament</a></li>
+            <li><a href="Practiciens.php">Practiciens</a></li>
+            <li><a href="Visiteurs.php">Visiteurs</a></li>
+            <li><a href="Rendus.php">Comptes-Rendus</a></li>
            </ul>
     </div>
 
