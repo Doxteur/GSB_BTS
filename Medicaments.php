@@ -22,29 +22,31 @@
      <input type="text" name="nom_commercial"> <br>
      <!-- Famille de médicaments -->
      <label for="famille">Famille :</label>
-      
- <select name="pets" id="pet-select">
+
      
- <?php
+     <select name="pets" id="pet-select">
+    <option value="nothing"><?php
    
-   try {
-           $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
-       } catch (Exception $e) {
-           die('Erreur : ' . $e->getMessage());
-       }
-   
-       $reponse = $bdd->query('SELECT * FROM famille');
-   
-       while ($data = $reponse->fetch()) {
-           echo nl2br ($data["FAM_LIBELLE"]);
-       }
- ?>
+ try {
+         $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
+     } catch (Exception $e) {
+         die('Erreur : ' . $e->getMessage());
+     }
+     
+     $reponse = $bdd->query('SELECT * FROM famille');
+ 
+     while ($data = $reponse->fetch()) {
+         echo "<option>". $data["FAM_LIBELLE"] . "</option>"; 
+     }
+?></option> 
+ </select>
+ 
+ 
 
-  
-    
 
-    
- </select><br>
+
+
+ <br>
      <!-- Composition du médicament -->
      <label for="composition_medicament">Composition : </label>
      <input type="text" name="composition_medicament"> <br>
