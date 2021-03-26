@@ -20,34 +20,60 @@
         die('Erreur : ' . $e->getMessage());
     }
 
-    $reponse = $bdd->query('SELECT RAP_NUM FROM rapport_visite');
+    $reponse = $bdd->query('SELECT * FROM rapport_visite');
 
+    
+    $numero_Rapport = $_POST["numero_rapport"];
+
+    
+    echo $numero_Rapport;
+    $numeroRapport = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM =     rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
+
+    
+    while ($data = $numeroRapport->fetch()) {
+        $valeurDate = $data["RAP_DATE"];
+        $valeurBilan = $data["RAP_BILAN"];
+        $praNum = $data["PRA_NUM"];
+        $rapMotif = $data["RAP_MOTIF"];
+        $nomPracticien = $data["PRA_NOM"];
+
+    }
+   
     ?>
 
     <form action="Rendus.php" method="post">
-    <label for="numero_rapport">Numero Rapport</label>
-        <select name="numero_rapport" id="pet-select">
-            <?php 
-            
-        while ($data = $reponse->fetch()) {
-            echo "<option>" . $data["RAP_NUM"] . "</option>";
-        }    
-            
-            
+        <label for="numero_rapport">Numero Rapport</label>
+        <select name="numero_rapport" id="searchRapport">
+            <?php
+            while ($data = $reponse->fetch()) {
+                echo "<option>" . $data["RAP_NUM"] . "</option>";
+            }
             ?>
         </select>
+        
+        <input type="submit" value="chercher">
         <!-- Date -->
+
         <label for="date_rapport">Date : </label>
-        <input type="text" name="date_rapport">
+        <?php
+        echo "<input type='text' name='date_rapport' value='" . strval($valeurDate) . "'>";
+        ?>
         <!-- Practicien -->
         <label for="practicien">Practicien :</label>
-        <input type="text" name="practicien">
+        <?php echo "<input type='text' name='praticien' value='" . strval($nomPracticien) . "'>";
+        ?>
+
+
         <!-- Motif -->
         <label for="motif">Motif Visite : </label>
-        <input type="text" name="motif">
+        <?php 
+        echo "<input type='text' name='motif' value='" . strval($rapMotif) . "'>";
+        ?>
         <!-- Bilan -->
         <label for="bilan">Bilan : </label>
-        <textarea name="bilan" id="bilan"></textarea>
+        <?php
+        echo "<textarea type='text' name='bilan'>" . $valeurBilan . "</textarea>";
+        ?>
         <!-- Offre d'échantillion -->
         <label for="offreEchan">Offre echantillion : </label>
         <input type="text" name="offreEchan">
