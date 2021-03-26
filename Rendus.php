@@ -22,24 +22,22 @@
 
     $reponse = $bdd->query('SELECT * FROM rapport_visite');
 
+    if (isset($_POST["numero_rapport"])) {
+        $numero_Rapport = $_POST["numero_rapport"];
     
-    $numero_Rapport = $_POST["numero_rapport"];
 
-    
-    echo $numero_Rapport;
-    $numeroRapport = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM =     rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
+    $numeroRapport = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
 
-    
+
     while ($data = $numeroRapport->fetch()) {
         $valeurDate = $data["RAP_DATE"];
         $valeurBilan = $data["RAP_BILAN"];
         $praNum = $data["PRA_NUM"];
         $rapMotif = $data["RAP_MOTIF"];
         $nomPracticien = $data["PRA_NOM"];
-
     }
-   
-    ?>
+}
+?>
 
     <form action="Rendus.php" method="post">
         <label for="numero_rapport">Numero Rapport</label>
@@ -50,7 +48,7 @@
             }
             ?>
         </select>
-        
+
         <input type="submit" value="chercher">
         <!-- Date -->
 
@@ -66,7 +64,7 @@
 
         <!-- Motif -->
         <label for="motif">Motif Visite : </label>
-        <?php 
+        <?php
         echo "<input type='text' name='motif' value='" . strval($rapMotif) . "'>";
         ?>
         <!-- Bilan -->
