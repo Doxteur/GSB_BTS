@@ -22,13 +22,20 @@
 
     $reponse = $bdd->query('SELECT * FROM rapport_visite');
     $reponseune = $bdd->query('SELECT * FROM rapport_visite LIMIT 1');
+
     while ($data = $reponseune->fetch()) {
         $valeurDate = $data["RAP_DATE"];
         $valeurBilan = $data["RAP_BILAN"];
+        $praNum = $data["PRA_NUM"];
+        $rapMotif = $data["RAP_MOTIF"];
+    }
+    $practicienf = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE rapport_visite.PRA_NUM =' . $praNum . ';');
+    while ($data = $practicienf->fetch()) {
+        $nomPracticien = $data["PRA_NOM"];
     }
     ?>
-    
-           
+
+
     <form action="Rendus.php" method="post">
         <label for="numero_rapport">Numero Rapport</label>
         <select name="numero_rapport" id="pet-select">
@@ -36,7 +43,7 @@
             while ($data = $reponse->fetch()) {
                 echo "<option>" . $data["RAP_NUM"] . "</option>";
             }
-            
+
             ?>
         </select>
         <!-- Date -->
@@ -47,15 +54,19 @@
         ?>
         <!-- Practicien -->
         <label for="practicien">Practicien :</label>
-        <input type="text" name="practicien">
-        
+        <?php echo "<input type='text' name='praticien' value='" . strval($nomPracticien) . "'>";
+        ?>
+
+
         <!-- Motif -->
         <label for="motif">Motif Visite : </label>
-        <input type="text" name="motif">
+        <?php 
+        echo "<input type='text' name='motif' value='" . strval($rapMotif) . "'>";
+        ?>
         <!-- Bilan -->
         <label for="bilan">Bilan : </label>
         <?php
-        echo "<textarea type='text' name='bilan'>".$valeurBilan."</textarea>";
+        echo "<textarea type='text' name='bilan'>" . $valeurBilan . "</textarea>";
         ?>
         <!-- Offre d'échantillion -->
         <label for="offreEchan">Offre echantillion : </label>
