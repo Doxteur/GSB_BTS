@@ -24,14 +24,22 @@
 
     <?php
 
-        try {
-            $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
 
-        $reponse = $bdd->query('SELECT * FROM visiteur');
+    $practicien = $_POST["Search"];
+    $reponse = $bdd->query("SELECT * FROM visiteur;");
+    if(isset($_POST["Search"])){
+    $reponse2 = $bdd->query('SELECT * FROM visiteur WHERE VIS_NOM =' . $practicien . ';');
 
+    while ($data = $reponse2->fetch()) {
+        $NOM = $data["VIS_NOM"];
+        $PRENOM = $data["Vis_PRENOM"];
+    }
+}
     ?>
 
     <form action="Visiteurs.php" action="post">
@@ -39,26 +47,30 @@
         <label for="Search">Chercher</label>
         <select name="Search" id="">
 
-            <?php 
-                    echo "<option>" . $data["VIS_NOM"] . $data["Vis_PRENOM"] . "</option>";
+            <?php
+            if (!isset($_POST["nom"])) {
                 while ($data = $reponse->fetch()) {
-                    
+                    $NOM = $data["VIS_NOM"];
+                    $PRENOM = $data["Vis_PRENOM"];
+                    echo "<option>" . $NOM . " " . $PRENOM . "</option>";
                 }
-
+            }
             ?>
 
-            <!-- METTRE LES NOM EN OPTIONS -->
         </select>
+        <input type="submit" value="Ok">
         <hr id="SearchVisiteur">
         <!-- Nom --> <br>
         <label for="nom">Nom</label>
-        <input type="text" name="nom">
+        <input type="text" name="nom" value=<?php
+                                            echo $NOM;
+                                            ?>>
         <!-- Prénom --> <br>
         <label for="prenom">Prénom</label>
         <input type="text" name="prenom">
         <!-- Adresse --> <br>
         <label for="adresse">Adresse</label>
-        <input type="text" name="adresse">
+        <input type="text" name="adresse" value=<?php $PRENOM = $data["Vis_PRENOM"]; ?>>
         <!-- Ville --> <br>
         <!-- Code Postal -->
         <label for="codePost">Ville</label>
@@ -69,14 +81,33 @@
         <!-- Secteur --> <br>
         <label for="secteur">Secteur</label>
         <select name="secteur" id="secteur">
-            <!-- METTRE LES SECTEURS EN OPTIONS -->
+
+            <option value="nothing"></option>
+            <?php
+            while ($data = $reponse->fetch()) {
+                // TROUVER LE SECTEUR
+                $SECTEUR = $data[""];
+                echo "<option>" . $SECTEUR . "</option>";
+            }
+            ?>
+
         </select>
         <!-- Labo --> <br>
         <label for="labo">Labo</label>
         <select name="labo" id="labo">
-            <!-- METTRE LES LABOS EN OPTIONS -->
-        </select>
 
+            <option value="nothing"></option>
+            <?php
+            while ($data = $reponse->fetch()) {
+                // TROUVER LE LABO
+                $LABO = $data[""];
+                echo "<option>" . $LABO . "</option>";
+            }
+            ?>
+
+        </select> <br><br>
+        <input type="submit" name="precedent" value="Précédent">
+        <input type="submit" name="suivant" value="Suivant">
 
     </form>
 
