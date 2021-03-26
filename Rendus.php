@@ -21,31 +21,37 @@
     }
 
     $reponse = $bdd->query('SELECT * FROM rapport_visite');
-    $reponseune = $bdd->query('SELECT * FROM rapport_visite LIMIT 1');
 
-    while ($data = $reponseune->fetch()) {
+    
+    $numero_Rapport = $_POST["numero_rapport"];
+
+    
+    echo $numero_Rapport;
+    $numeroRapport = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM =     rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
+
+    
+    while ($data = $numeroRapport->fetch()) {
         $valeurDate = $data["RAP_DATE"];
         $valeurBilan = $data["RAP_BILAN"];
         $praNum = $data["PRA_NUM"];
         $rapMotif = $data["RAP_MOTIF"];
-    }
-    $practicienf = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE rapport_visite.PRA_NUM =' . $praNum . ';');
-    while ($data = $practicienf->fetch()) {
         $nomPracticien = $data["PRA_NOM"];
-    }
-    ?>
 
+    }
+   
+    ?>
 
     <form action="Rendus.php" method="post">
         <label for="numero_rapport">Numero Rapport</label>
-        <select name="numero_rapport" id="pet-select">
+        <select name="numero_rapport" id="searchRapport">
             <?php
             while ($data = $reponse->fetch()) {
                 echo "<option>" . $data["RAP_NUM"] . "</option>";
             }
-
             ?>
         </select>
+        
+        <input type="submit" value="chercher">
         <!-- Date -->
 
         <label for="date_rapport">Date : </label>
