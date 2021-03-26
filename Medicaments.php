@@ -16,7 +16,32 @@
 <form action="Medicaments.php" method="post">
      <!-- Code du médicament-->
      <label for="code">Code : </label>
-     <input type="text" name="code"> <br>
+
+
+
+
+     <select name="pets" id="pet-select">
+     <option value="nothing"><?php
+ try {
+         $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
+     } catch (Exception $e) {
+         die('Erreur : ' . $e->getMessage());
+     }
+     
+     $reponse = $bdd->query('SELECT * FROM medicament');
+ 
+     while ($data = $reponse->fetch()) {
+         echo "<option>". $data["MED_DEPOTLEGAL"] . "</option>"; 
+     }
+?>
+</option> 
+</select>
+
+
+
+
+
+     <br>
      <!-- Nom commercial du médicament -->
      <label for="nom_commercial">Nom Commercial : </label>
      <input type="text" name="nom_commercial"> <br>
@@ -24,22 +49,22 @@
      <label for="famille">Famille :</label>
 
      
-     <select name="pets" id="pet-select">
-    <option value="nothing"><?php
-   
+    <select name="pets" id="pet-select">
+<option value="nothing"><?php
  try {
          $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
      } catch (Exception $e) {
          die('Erreur : ' . $e->getMessage());
      }
      
-     $reponse = $bdd->query('SELECT * FROM famille');
+     $reponse = $bdd->query('SELECT * FROM famille INNER JOIN medicament ON FAM_CODE.medicament = FAM_CODE.famille WHERE  ');
  
      while ($data = $reponse->fetch()) {
          echo "<option>". $data["FAM_LIBELLE"] . "</option>"; 
      }
-?></option> 
- </select>
+?>
+</option> 
+    </select>
  
  
 
@@ -74,22 +99,6 @@
 
 
 
-
-
-<?php
-   
-try {
-        $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-
-    $reponse = $bdd->query('SELECT RAP_NUM FROM rapport_visite');
-
-    while ($data = $reponse->fetch()) {
-        echo nl2br ($data["RAP_NUM"]);
-    }
-?>
 
 </body>
 </html>
