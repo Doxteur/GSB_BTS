@@ -14,38 +14,42 @@
 
     <?php
 
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=swiss_visite;charset=utf8', 'root', '');
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
+    include("bddLogin.php");
 
     $reponse = $bdd->query('SELECT * FROM rapport_visite');
 
     if (isset($_POST["numero_rapport"])) {
         $numero_Rapport = $_POST["numero_rapport"];
-    
+        $numeroRapport = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
 
-    $numeroRapport = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
-
-
-    while ($data = $numeroRapport->fetch()) {
-        $valeurDate = $data["RAP_DATE"];
-        $valeurBilan = $data["RAP_BILAN"];
-        $praNum = $data["PRA_NUM"];
-        $rapMotif = $data["RAP_MOTIF"];
-        $nomPracticien = $data["PRA_NOM"];
+        while ($data = $numeroRapport->fetch()) {
+            $valeurDate = $data["RAP_DATE"];
+            $valeurBilan = $data["RAP_BILAN"];
+            $praNum = $data["PRA_NUM"];
+            $rapMotif = $data["RAP_MOTIF"];
+            $nomPracticien = $data["PRA_NOM"];
+        }
+    } else {
+        $valeurDate = "";
+        $valeurBilan = " ";
+        $praNum = " ";
+        $rapMotif = " ";
+        $nomPracticien = " ";
     }
-}
-?>
+    ?>
 
     <form action="Rendus.php" method="post">
         <label for="numero_rapport">Numero Rapport</label>
         <select name="numero_rapport" id="searchRapport">
             <?php
-            while ($data = $reponse->fetch()) {
-                echo "<option>" . $data["RAP_NUM"] . "</option>";
+             if (isset($_POST["numero_rapport"])) {
+                echo "<option selected='selected' disabled hidden>" . $_POST["numero_rapport"] . "</option>";
+
             }
+                while ($data = $reponse->fetch()) {
+                    echo "<option>" . $data["RAP_NUM"] . "</option>";
+                }
+           
             ?>
         </select>
 
@@ -54,6 +58,7 @@
 
         <label for="date_rapport">Date : </label>
         <?php
+
         echo "<input type='text' name='date_rapport' value='" . strval($valeurDate) . "'>";
         ?>
         <!-- Practicien -->
@@ -70,7 +75,7 @@
         <!-- Bilan -->
         <label for="bilan">Bilan : </label>
         <?php
-        echo "<textarea type='text' name='bilan'>" . $valeurBilan . "</textarea>";
+        echo "<textarea type='text' name='bilan'>" . $valeurBilan  . "</textarea>";
         ?>
         <!-- Offre d'échantillion -->
         <label for="offreEchan">Offre echantillion : </label>
