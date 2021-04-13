@@ -112,7 +112,7 @@
                 ?>
                 <!-- Practicien -->
                 <label for="practicien" id="labelPraticien">Practicien :</label>
-                <?php echo "<input type='text' name='praticien' id='inputPraticien'value='" . strval($nomPracticien) ." " .strval($prenomPraticien) . "'>";
+                <?php echo "<input type='text' name='praticien' id='inputPraticien' value='" . strval($nomPracticien) ." " .strval($prenomPraticien) . "'>";
                 ?>
 
 
