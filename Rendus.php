@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/Rendus.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -59,11 +61,15 @@
 
             include("bddLogin.php");
 
-            $reponse = $bdd->query('SELECT * FROM rapport_visite');
+            $reponse = $bdd->prepare('SELECT * FROM rapport_visite');
+            $reponse->execute();
 
             if (isset($_POST["numero_rapport"])) {
                 $numero_Rapport = $_POST["numero_rapport"];
-                $numeroRapport = $bdd->query('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
+                $numeroRapport = $bdd->prepare('SELECT * FROM praticien INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE rapport_visite.RAP_NUM =' . $numero_Rapport . ';');
+                $numeroRapport->execute();
+                $medicament = $bdd->prepare('SELECT * FROM offrir INNER JOIN medicament ON offrir.MED_DEPOTLEGAL = medicament.MED_DEPOTLEGAL WHERE offrir.RAP_NUM =' . $numero_Rapport . ';');
+                $medicament->execute();
 
                 while ($data = $numeroRapport->fetch()) {
                     $valeurDate = $data["RAP_DATE"];
@@ -72,7 +78,6 @@
                     $rapMotif = $data["RAP_MOTIF"];
                     $nomPracticien = $data["PRA_NOM"];
                     $prenomPraticien = $data["PRA_PRENOM"];
-                    
                 }
             } else {
                 $valeurDate = "";
@@ -111,10 +116,13 @@
                 echo "<input type='text' name='date_rapport' id='dateInput' value='" . strval($valeurDate) . "'>";
                 ?>
                 <!-- Practicien -->
-                <label for="practicien" id="labelPraticien">Practicien :</label>
-                <?php echo "<input type='text' name='praticien' id='inputPraticien'value='" . strval($nomPracticien) ." " .strval($prenomPraticien) . "'>";
-                ?>
 
+                <label for="practicien" id="labelPraticien">Practicien :</label>
+                <div>
+                    <?php echo "<input type='text' name='praticien' id='inputPraticien'value='" . strval($nomPracticien) . " " . strval($prenomPraticien) . "'>";
+                    ?>
+                    <input type="button" value="En Details" id="search" onclick="showPraticien()">
+                </div>
 
                 <!-- Motif -->
                 <label for="motif" id="labelMotif">Motif Visite : </label>
@@ -123,18 +131,58 @@
                 ?>
                 <!-- Bilan -->
                 <div id="bilan">
-                <label for="bilan" id="labelBilan">Bilan : </label>
-                <?php
-                echo "<textarea type='text' id='inputBilan' name='bilan'>" . $valeurBilan  . "</textarea>";
-                ?>
-            </div>
-                <!-- Offre d'échantillion -->
-                <label for="offreEchan">Offre echantillion : </label>
-                <input type="text" name="offreEchan">
+                    <label for="bilan" id="labelBilan">Bilan : </label>
+                    <?php
+                    echo "<textarea type='text' id='inputBilan' name='bilan'>" . $valeurBilan  . "</textarea>";
+                    ?>
+                </div>
 
-            </form>
+
+                <!-- Offre d'échantillion -->
+                <label for="offreEchan" id="offre">Offre echantillion : </label>
+                <div id="medicament">
+                <?php
+                while ($data = $medicament->fetch()) {
+                    $NomMedic = $data["MED_NOMCOMMERCIAL"];
+                    $nombre = $data["OFF_QTE"];
+                    echo "<div id='" . $NomMedic . "'>";
+                    echo "<h1> " . $NomMedic . " : </h1> </br>";
+
+                    echo "<h1> " . $nombre . "</h1>";
+                    echo "</div>";
+
+                }
+                ?>
+                </div>
         </div>
+        </form>
+       
+    </div>
+
+    <div id="showPraticien" style="display:none">
+
+
+    </div>
+
+
+
     </div>
 </body>
+
+<script>
+    function showPraticien() {
+        document.getElementById("showPraticien").style.display = "initial";
+    }
+
+    function Suivant() {
+        console.log($('#searchRapport').index);
+    }
+
+    function Precedent() {
+
+    }
+</script>
+
+
 
 </html>
