@@ -28,11 +28,15 @@
 
             include("bddLogin.php");
 
-            $reponse = $bdd->query('SELECT * FROM visiteur');
+            $reponse = $bdd->prepare('SELECT * FROM visiteur');
+            $reponse->execute();
 
             if (isset($_POST["Search"])) {
                 $num_Visiteur = $_POST["Search"];
-                $numVisiteur = $bdd->query('SELECT * FROM visiteur INNER JOIN secteur ON visteur.SEC_CODE = secteur.SEC_CODE INNER JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE WHERE visteur.VIS_MATRICULE =' . $num_Visiteur . ';');
+                $labVisiteur = $bdd->prepare('SELECT * FROM visiteur INNER JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE WHERE visteur.VIS_MATRICULE =' . $num_Visiteur . ';');
+                $labVisiteur->execute();
+                $secVisiteur = $bdd->prepare('SELECT * FROM visiteur INNER JOIN secteur ON visteur.SEC_CODE = secteur.SEC_CODE WHERE visteur.VIS_MATRICULE =' . $num_Visiteur . ';');
+                $secVisiteur->execute();
 
                 while ($data = $numVisiteur->fetch()) {
                     $NOM = $data["VIS_NOM"];
