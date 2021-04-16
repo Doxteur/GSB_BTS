@@ -58,7 +58,7 @@
     <div id="content">
         <div id="inner_content">
             <?php
-
+            $increment = 1;
             include("bddLogin.php");
 
             $reponse = $bdd->prepare('SELECT * FROM rapport_visite');
@@ -89,17 +89,18 @@
             }
             ?>
 
-            <form action="Rendus.php" method="post">
+            <form action="Rendus.php" method="post" id="formulaire">
                 <label for="numero_rapport" id="numeroRapport">Numero Rapport : </label>
                 <div id="divRapport">
 
                     <select name="numero_rapport" id="searchRapport">
                         <?php
                         if (isset($_POST["numero_rapport"])) {
-                            echo "<option selected='selected' disabled hidden>" . $_POST["numero_rapport"] . "</option>";
+                            echo "<option selected='selected' disabled hidden value=". $_POST["numero_rapport"]." id=".$_POST["numero_rapport"].">" . $_POST["numero_rapport"] . "</option>";
                         }
                         while ($data = $reponse->fetch()) {
-                            echo "<option>" . $data["RAP_NUM"] . "</option>";
+                            echo "<option value=".$data["RAP_NUM"]." id=".$increment.">" . $data["RAP_NUM"] . "</option>";
+                            $increment++;
                         }
 
                         ?>
@@ -141,22 +142,26 @@
                 <!-- Offre d'échantillion -->
                 <label for="offreEchan" id="offre">Offre echantillion : </label>
                 <div id="medicament">
-                <?php
-                while ($data = $medicament->fetch()) {
-                    $NomMedic = $data["MED_NOMCOMMERCIAL"];
-                    $nombre = $data["OFF_QTE"];
-                    echo "<div id='" . $NomMedic . "'>";
-                    echo "<h1> " . $NomMedic . " : </h1> </br>";
+                    <?php
+                    if (isset($_POST["numero_rapport"])) {
 
-                    echo "<h1> " . $nombre . "</h1>";
-                    echo "</div>";
+                        while ($data = $medicament->fetch()) {
+                            $NomMedic = $data["MED_NOMCOMMERCIAL"];
+                            $nombre = $data["OFF_QTE"];
+                            echo "<div id='" . $NomMedic . "'>";
+                            echo "<h1> " . $NomMedic . " : </h1> </br>";
+                            echo "<h1> " . $nombre . "</h1>";
+                            echo "</div>";
+                        }
+                    }
+                    ?>
 
-                }
-                ?>
                 </div>
+                <h1 onclick="Suivant() ">Suivant</h1>
+                <h1></h1>
         </div>
         </form>
-       
+
     </div>
 
     <div id="showPraticien" style="display:none">
@@ -173,9 +178,22 @@
     function showPraticien() {
         document.getElementById("showPraticien").style.display = "initial";
     }
-
     function Suivant() {
-        console.log($('#searchRapport').index);
+        // document.getElementById("searchRapport").selectedIndex += document.getElementById(document.getElementById("searchRapport").selectedIndex).id;
+        var x = document.getElementById("searchRapport").selectedIndex;
+        var y = document.getElementById("searchRapport").options;
+
+        for(let i = 1; i < y.length;i++){
+            console.log(y[i].value + " " + y[0].value);
+            if(y[i].value == y[x].value){
+                let temp = i;
+                temp+=1;
+                document.getElementById("searchRapport").selectedIndex += temp;
+                break;
+            }
+        }
+        document.forms["formulaire"].submit();
+
     }
 
     function Precedent() {

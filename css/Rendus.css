@@ -245,8 +245,7 @@ label {
 #inputBilan {
     font-family: "Open Sans";
     border: none;
-    min-width: 150px;
-    max-width: 250px;
+    width: 60%;
     font-size: 15px;
     border-bottom: solid #386eb2 1px;
 }
