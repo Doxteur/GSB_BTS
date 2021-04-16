@@ -44,17 +44,15 @@
                     $LABO = $data["LAB_CODE"];
                 }
             } else {
-                $NOM = "";
-                $PRENOM = "";
-                $ADRESSE = "";
-                $VILLE= "";
-                $CODEP = "";
-                $SECTEUR = "";
-                $LABO = "";
+                $NOM = " ";
+                $PRENOM = " ";
+                $ADRESSE = " ";
+                $VILLE= " ";
+                $CODEP = " ";
+                $SECTEUR = " ";
+                $LABO = " ";
             }
             ?>
-
-
 
             <form action="Visiteurs.php" action="post">
                 <!-- Chercher --> <br>
@@ -80,22 +78,35 @@
 
                 <!-- Nom --> <br>
                 <label for="nom">Nom</label>
-                <input type="text" name="nom" value='<?php
-                                                    echo strval($NOM);
-                                                    ?>'>
+                <?php
+
+                echo "<input type='text' name='nom' id='dateInput' value='" . strval($NOM) . "'>";
+                ?>
                 <!-- Prénom --> <br>
                 <label for="prenom">Prénom</label>
-                <input type="text" name="prenom">
+                <?php
+
+                echo "<input type='text' name='prenom' id='dateInput' value='" . strval($PRENOM) . "'>";
+                ?>
                 <!-- Adresse --> <br>
                 <label for="adresse">Adresse</label>
-                <input type="text" name="adresse" value=<?php $PRENOM = $data["Vis_PRENOM"]; ?>>
+                <?php
+
+                echo "<input type='text' name='adresse' id='dateInput' value='" . strval($ADRESSE) . "'>";
+                ?>
                 <!-- Ville --> <br>
                 <!-- Code Postal -->
                 <label for="codePost">Ville</label>
-                <input type="text" name="CodePost">
+                <?php
+
+                echo "<input type='text' name='codePost' id='dateInput' value='" . strval($CODEP) . "'>";
+                ?>
                 <!-- Nom Ville -->
                 <label for="nomVille"></label>
-                <input type="text" name="nomVille">
+                <?php
+
+                echo "<input type='text' name='nomVille' id='dateInput' value='" . strval($VILLE) . "'>";
+                ?>
                 <!-- Secteur --> <br>
                 <label for="secteur">Secteur</label>
                 <select name="secteur" id="secteur">
