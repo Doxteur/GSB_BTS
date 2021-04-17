@@ -269,3 +269,46 @@ label {
     color: #80a2cd;
     font-family: "Open sans";
 }
+
+#divRapport {
+    display: flex;
+}
+
+#suivant {
+    position: relative;
+    background-color: #386eb2;
+    border-radius: 55px;
+    border: none;
+    color: white;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#myButton {
+    display: flex;
+}
+
+#myButton h1 {
+    position: relative;
+    background-color: #386eb2;
+    border-radius: 55px;
+    border: none;
+    color: white;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+    margin: 15px;
+}
+
+#Update {
+    visibility: hidden;
+}
