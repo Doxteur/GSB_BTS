@@ -5,22 +5,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Visiteurs</title>
+    <link rel="stylesheet" href="css/Visiteurs.css">
 </head>
 
 <body>
-
     <div id="header">
-        <ul>
-            <li><a class="Accueil" href="index.php">Accueil</a></li>
-            <li><a href="Medicaments.php">Médicament</a></li>
-            <li><a href="Practiciens.php">Practiciens</a></li>
-            <li><a href="Visiteurs.php">Visiteurs</a></li>
-            <li><a href="Rendus.php">Comptes-Rendus</a></li>
-        </ul>
+
+        <img src="Images/logo_2.png" alt="" id="logo">
+        <div id="compteHeader">
+            <img src="Images/Icons/avatar.png" alt="">
+            <h1>Jhon Doe</h1>
+        </div>
     </div>
-    <hr>
+
+    <div id="nav">
+        <div id="inner_nav">
+            <h2>Informations</h2>
+            <ul>
+                <div>
+                    <img src="Images/Icons/rapport.png" alt="Comptes-Rendus">
+                    <li class="selected">Comptes-Rendus</li>
+                </div>
+                <div>
+                    <img src="Images/Icons/doctor.png" alt="Praticien">
+                    <li>Praticiens</li>
+                </div>
+                <div>
+                    <img src="Images/Icons/visitor.png" alt="Visiteurs">
+                    <li>Visiteurs</li>
+                </div>
+                <div>
+                    <img src="Images/Icons/medicament.png" alt="Medicaments">
+                    <li>Medicaments</li>
+                </div>
+            </ul>
+            <h2>Mon Compte</h2>
+            <ul id="monCompte">
+                <div>
+                    <img src="Images/Icons/avatar.png" alt="Medicaments">
+                    <li>Jhon Doe</li>
+                </div>
+            </ul>
+        </div>
+
+
+    </div>
+
 
     <div id="content">
         <div id="inner_content">
@@ -51,102 +82,108 @@
                 $NOM = " ";
                 $PRENOM = " ";
                 $ADRESSE = " ";
-                $VILLE= " ";
+                $VILLE = " ";
                 $CODEP = " ";
                 $SECTEUR = " ";
                 $LABO = " ";
             }
             ?>
 
-            <form action="Visiteurs.php" action="post">
-                <!-- Chercher --> <br>
-                <label for="Search">Chercher</label>
-                <select name="Search" id="">
+            <form action="Visiteurs.php" method="post">
+                <!-- Chercher -->
+                <label for="Chercher" id="numeroRapport">Nom visiteur : </label>
+                <div id="divRapport">
 
+                    <select name="Search" id="searchRapport">
+                        <?php
+
+                        if (isset($_POST["Search"])) {
+                            echo "<option selected='selected' disabled hidden>" . $_POST["Search"] . "</option>";
+                        }
+                        while ($data = $reponse->fetch()) {
+                            $NOM = $data["VIS_NOM"];
+                            $PRENOM = $data["Vis_PRENOM"];
+                            echo "<option>" . $NOM . " " . $PRENOM . "</option>";
+                        }
+
+
+                        ?>
+                    </select>
+
+                    <input type="submit" value="Chercher" id="search">
+                </div>
+                <hr>
+                <!-- Nom -->
+
+                <label for="nom" id="nomLabel">Nom - Prénom : </label>
+                <?php
+
+                echo "<input type='text' name='nom' id='nomInput' value='" . strval($NOM) . " " .strval($PRENOM) . "'>";
+                ?>
+                <!-- Adresse -->
+                <label for="adresse" id="adresseLabel">Adresse :</label>
+                <?php echo "<input type='text' name='adresse' id='adresseInput' value='" . strval($ADRESSE) . "'>";
+                ?>
+
+                <!-- Ville -->
+                <label for="ville" id="villeLabel">Ville : </label>
+                <?php
+                echo "<input type='text' name='ville' id='villeInput' value='" . strval($VILLE) . ", " . strval($CODEP) . "'>";
+                ?>
+                <!-- Bilan -->
+                <div id="bilan">
+                    <label for="bilan" id="labelBilan">Bilan : </label>
                     <?php
-
-                    if (isset($_POST["Search"])) {
-                        echo "<option selected='selected' disabled hidden>" . $_POST["Search"] . "</option>";
-                    }
-                    while ($data = $reponse->fetch()) {
-                        $NOM = $data["VIS_NOM"];
-                        $PRENOM = $data["Vis_PRENOM"];
-                        echo "<option>" . $NOM . " " . $PRENOM . "</option>";
-                    }
-
-                  
+                    echo "<textarea type='text' id='inputBilan' name='bilan'>" . $valeurBilan  . "</textarea>";
                     ?>
+                </div>
 
-                </select>
-                <input type="submit" value="Ok" id="search">
 
-                <!-- Nom --> <br>
-                <label for="nom">Nom</label>
-                <?php
-
-                echo "<input type='text' name='nom' id='dateInput' value='" . strval($NOM) . "'>";
-                ?>
-                <!-- Prénom --> <br>
-                <label for="prenom">Prénom</label>
-                <?php
-
-                echo "<input type='text' name='prenom' id='dateInput' value='" . strval($PRENOM) . "'>";
-                ?>
-                <!-- Adresse --> <br>
-                <label for="adresse">Adresse</label>
-                <?php
-
-                echo "<input type='text' name='adresse' id='dateInput' value='" . strval($ADRESSE) . "'>";
-                ?>
-                <!-- Ville --> <br>
-                <!-- Code Postal -->
-                <label for="codePost">Ville</label>
-                <?php
-
-                echo "<input type='text' name='codePost' id='dateInput' value='" . strval($CODEP) . "'>";
-                ?>
-                <!-- Nom Ville -->
-                <label for="nomVille"></label>
-                <?php
-
-                echo "<input type='text' name='nomVille' id='dateInput' value='" . strval($VILLE) . "'>";
-                ?>
-                <!-- Secteur --> <br>
-                <label for="secteur">Secteur</label>
-                <select name="secteur" id="secteur">
-
-                    <option value="nothing"></option>
+                <!-- Offre d'échantillion -->
+                <label for="offreEchan" id="offre">Offre echantillion : </label>
+                <div id="medicament">
                     <?php
-                    while ($data = $reponse->fetch()) {
-                        // TROUVER LE SECTEUR
-                        $SECTEUR = $data[""];
-                        echo "<option>" . $SECTEUR . "</option>";
-                    }
-                    ?>
+                    while ($data = $medicament->fetch()) {
+                        $NomMedic = $data["MED_NOMCOMMERCIAL"];
+                        $nombre = $data["OFF_QTE"];
+                        echo "<div id='" . $NomMedic . "'>";
+                        echo "<h1> " . $NomMedic . " : </h1> </br>";
 
-                </select>
-                <!-- Labo --> <br>
-                <label for="labo">Labo</label>
-                <select name="labo" id="labo">
-
-                    <option value="nothing"></option>
-                    <?php
-                    while ($data = $reponse->fetch()) {
-                        // TROUVER LE LABO
-                        $LABO = $data[""];
-                        echo "<option>" . $LABO . "</option>";
+                        echo "<h1> " . $nombre . "</h1>";
+                        echo "</div>";
                     }
                     ?>
-
-                </select> <br><br>
-                <input type="submit" name="precedent" value="Précédent">
-                <input type="submit" name="suivant" value="Suivant">
-
-            </form>
-
+                </div>
         </div>
+        </form>
+
     </div>
 
+    <div id="showPraticien" style="display:none">
+
+
+    </div>
+
+
+
+    </div>
+
+
+
 </body>
+
+<script>
+    function showPraticien() {
+        document.getElementById("showPraticien").style.display = "initial";
+    }
+
+    function Suivant() {
+        console.log($('#searchRapport').index);
+    }
+
+    function Precedent() {
+
+    }
+</script>
 
 </html>

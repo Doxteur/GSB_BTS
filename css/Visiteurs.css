@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #f4f4f4;
+}
+
+#nav {
+    float: left;
+    display: table;
+    background-color: white;
+    width: 250px;
+    height: 88%;
+}
+
+#inner_nav {
+    display: table-cell;
+    vertical-align: middle;
+    font-family: "Open Sans";
+}
+
+#nav h2 {
+    color: #b7c1c2;
+    font-size: 20px;
+    padding: 20px;
+}
+
+ul div {
+    font-size: 17px;
+    height: 50px;
+    margin: auto;
+    border-radius: 55px;
+    min-width: 85%;
+    display: table;
+}
+
+ul div:nth-child(3) {
+    min-width: 95%;
+    background-color: #f1f1f1;
+}
+
+li {
+    transition: color ease-in-out 0.2s;
+}
+
+li:hover {
+    cursor: pointer;
+    color: #386eb2;
+}
+
+.selected {
+    color: #386eb2;
+}
+
+ul div li {
+    text-align: center;
+    float: inline-start;
+}
+
+ul div:not(:first-child) {
+    margin-top: 60px;
+}
+
+ul div:not(:last-child) {
+    margin-bottom: 25px;
+}
+
+ul li {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    font-weight: 600;
+    margin: auto;
+}
+
+#nav img {
+    position: absolute;
+    width: 30px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+#monCompte img {
+    width: 30px;
+}
+
+
+/* Header */
+
+#header {
+    background-color: white;
+    height: 12%;
+    font-family: "Open sans";
+}
+
+#logo {
+    width: 120px;
+    margin-left: 65px;
+    margin-top: 25px;
+}
+
+#header div {
+    float: right;
+    display: flex;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#header div h1 {
+    transform: translateY(25%);
+    margin-left: 45px;
+    font-size: 25px;
+    margin-right: 100px;
+}
+
+#header div h1:hover {
+    cursor: pointer;
+}
+
+#compteHeader img {
+    width: 70px;
+}
+
+#content {
+    background-color: white;
+    width: 83%;
+    height: 85%;
+    margin-left: 15%;
+    margin-top: 0.8%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#numeroRapport {
+    color: #80a2cd;
+    font-family: "Open Sans";
+    font-size: 35px;
+}
+
+#searchRapport {
+    width: 200px;
+    height: 30px;
+    border: #386eb2 solid 1px;
+    font-size: 20px;
+    border-radius: 55px;
+    outline: none;
+}
+
+#search {
+    background-color: #386eb2;
+    outline: none;
+    border-radius: 55px;
+    border: none;
+    width: 150px;
+    height: 25px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+form hr {
+    width: 105%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: -25px;
+    height: 0.01px;
+    background-color: #80a2cd;
+}
+
+#inner_content {
+    padding: 100px;
+}
+
+#nomLabel {
+    font-size: 35px;
+    color: #80a2cd;
+    font-family: "Open sans";
+}
+
+#nomInput {
+    border: none;
+    min-width: 150px;
+    max-width: 250px;
+    font-size: 25px;
+    border-bottom: solid #386eb2 1px;
+}
+
+label {
+    margin-top: 15px;
+}
+
+#adresseLabel {
+    font-size: 35px;
+    color: #80a2cd;
+    font-family: "Open sans";
+}
+
+#adresseInput {
+    font-family: "Open Sans";
+    border: none;
+    min-width: 150px;
+    max-width: 250px;
+    font-size: 25px;
+    border-bottom: solid #386eb2 1px;
+}
+
+#villeLabel {
+    font-size: 35px;
+    color: #80a2cd;
+    font-family: "Open sans";
+}
+
+#villeInput {
+    font-family: "Open Sans";
+    border: none;
+    min-width: 150px;
+    max-width: 250px;
+    font-size: 25px;
+    border-bottom: solid #386eb2 1px;
+}
+
+#bilan {
+    display: flex;
+    flex-direction: column;
+}
+
+#labelBilan {
+    font-size: 35px;
+    color: #80a2cd;
+    font-family: "Open sans";
+}
+
+#inputBilan {
+    font-family: "Open Sans";
+    border: none;
+    min-width: 150px;
+    max-width: 250px;
+    font-size: 15px;
+    border-bottom: solid #386eb2 1px;
+}
+
+#showPraticien {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#medicament div {
+    display: flex;
+    font-family: "Open Sans";
+    color: black;
+    font-size: 12px;
+}
+
+#offre {
+    font-size: 35px;
+    color: #80a2cd;
+    font-family: "Open sans";
+}
