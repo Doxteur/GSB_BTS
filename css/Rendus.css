@@ -180,7 +180,8 @@ form hr {
 }
 
 #inner_content {
-    padding: 100px;
+    padding: 90px;
+    height: 70%;
 }
 
 #dateLabel {
@@ -245,8 +246,7 @@ label {
 #inputBilan {
     font-family: "Open Sans";
     border: none;
-    min-width: 150px;
-    max-width: 250px;
+    width: 60%;
     font-size: 15px;
     border-bottom: solid #386eb2 1px;
 }
@@ -269,4 +269,72 @@ label {
     font-size: 35px;
     color: #80a2cd;
     font-family: "Open sans";
+}
+
+#divRapport {
+    display: flex;
+}
+
+#suivant {
+    position: relative;
+    background-color: #386eb2;
+    border-radius: 55px;
+    border: none;
+    color: white;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#myButton {
+    display: flex;
+}
+
+#myButton h1 {
+    position: relative;
+    background-color: #386eb2;
+    border-radius: 55px;
+    border: none;
+    color: white;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+    margin: 15px;
+}
+
+#Update {
+    visibility: hidden;
+}
+
+#grayScreen {
+    display: none;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+}
+
+#nouveauFormDiv {
+    display: none;
+    background-color: white;
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
 }
