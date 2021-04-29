@@ -48,7 +48,6 @@ session_start();
         $dateExplode = explode('-', $DateEmbauche);
         if(count($dateExplode) < 3){
             throw new Exception('Mauvais Format date!');
-
         }
         $jour = $dateExplode[0];
         $mois = $dateExplode[1];

@@ -107,6 +107,10 @@ session_start();
             include("bddLogin.php");
 
             $reponse = $bdd->prepare('SELECT * FROM rapport_visite');
+            $praticien = $bdd->prepare('SELECT PRA_NOM,PRA_PRENOM,PRA_NUM FROM praticien');
+            $insertRapport = $bdd->prepare("INSERT INTO rapport_visite (VIS_MATRICULE,RAP_NUM,PRA_NUM,RAP_DATE,RAP_BILAN,RAP_MOTIF) VALUES (:VIS_MATRICULE, :RAP_NUM,:PRA_NUM,:RAP_DATE,:RAP_BILAN,:RAP_MOTIF)");
+
+
             $reponse->execute();
             if (isset($_POST["numero_rapport"])) {
                 $numero_Rapport = $_POST["numero_rapport"];
@@ -139,8 +143,7 @@ session_start();
             <form action="Rendus.php" method="post" id="formulaire">
                 <label for="numero_rapport" id="numeroRapport">Numero Rapport : </label>
                 <div id="divRapport">
-                    <select name="numero_rapport" id="searchRapport">
-                        <?php
+                    <select name="numero_rapport" id="searchRapport">                        <?php
                         if (isset($_POST["numero_rapport"])) {
                             echo "<option selected='selected' disabled hidden value=" . $_POST["numero_rapport"] . " id=" . $_POST["numero_rapport"] . ">" . $_POST["numero_rapport"] . "</option>";
                         }
@@ -208,6 +211,57 @@ session_start();
                 <h1 onclick="Nouveau()" id="nouveau">Nouveau</h1>
                 <h1 onclick="MettreAJour()" id="Update">Envoyer</h1>
             </div>
+            <div id="grayScreen">
+
+            </div>
+            <div id="nouveauFormDiv">
+                <form action="Rendus.php" name="nouveauForm" method="POST">
+                    <label for="Date">Date</label>
+                    <input type="text" name="Date" required placeholder="Format 2003-05-21">
+                    <label for="Praticien">Praticien</label>
+                    <select name="newPraticien" id="newPraticien" required>
+                        <?php
+                        $praticien->execute();
+                        while ($data = $praticien->fetch()) {
+                            echo "<option name='praticienNom' value=" . $data["PRA_NUM"] . ">" . $data["PRA_NOM"] . " " . $data["PRA_PRENOM"] . "</option> ";
+                        }
+                        ?>
+                    </select>
+                    <label for="Motif">Motif</label>
+                    <input type="text" name="Motif" required placeholder="Entrez un motif">
+                    <label for="Bilan">Bilan</label>
+                    <input type="text" name="Bilan" required placeholder="Entrez un bilan">
+                    <label for="Offre">Offre</label>
+                    <input type="text" name="Offre" required placeholder="Offre echantillion">
+
+                    <input type="submit" value="Envoyer">
+                </form>
+
+            </div>
+            <?php
+
+            $test = 'aezae';
+            $test1 = 15;
+            if (!empty($_POST["Date"])) {
+                
+                $indefinie = 'indefinie';
+                $lastRapport = $bdd->query("SELECT *
+                FROM rapport_visite
+               ORDER BY RAP_NUM DESC LIMIT 1");
+                $numeroRap1 = $lastRapport->fetchAll(PDO::FETCH_OBJ);
+                $numeroRap1 = $numeroRap1[0]->RAP_NUM;
+                $numeroRap1 += 1;
+                $date = "2003-05-12";
+                var_dump($numeroRap1);
+                $insertRapport->bindParam(':VIS_MATRICULE',  $indefinie);
+                $insertRapport->bindParam(':RAP_NUM', strval($numeroRap1));
+                $insertRapport->bindParam(':PRA_NUM', $test1);
+                $insertRapport->bindParam(':RAP_DATE', $date );
+                $insertRapport->bindParam(':RAP_BILAN', $test);
+                $insertRapport->bindParam(':RAP_MOTIF', $test);
+                $insertRapport->execute();
+            }
+            ?>
 
     </div>
 
@@ -315,23 +369,8 @@ session_start();
 ?>
 <script>
     function Nouveau() {
-        document.getElementById("Update").style.visibility = "visible"
-        document.getElementById("dateInput").value = " ";
-        document.getElementById("inputPraticien").value = " ";
-        document.getElementById("inputMotif").value = " ";
-        document.getElementById("inputBilan").value = " ";
-        document.getElementById("inputBilan").value = " ";
-        document.getElementById("inputBilan").value = " ";
-        var x = document.getElementById("searchRapport");
-        var option = document.createElement("option");
-        var lastValue = $('#searchRapport option:last-child').val();
-        lastValue = 1 + +lastValue
-        option.text = lastValue;
-        option.value = lastValue;
-        console.log(typeof(lastValue))
-        x.add(option);
-        $('#searchRapport').val($('#searchRapport option:last-child').val());
-
+        document.getElementById("grayScreen").style.display = "initial"
+        document.getElementById("nouveauFormDiv").style.display = "initial"
     }
 
     function MettreAjour() {
