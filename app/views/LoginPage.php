@@ -6,7 +6,7 @@
         <label for="Password" class="form-label">Password:</label>
         <input type="password" name="Password" class="form-control">
 
-        <input type="submit" name="envoyer" value="Se Connecer" class="btn btn-primary mt-4" >
+        <input type="submit" name="envoyer" value="Se Connecter" class="btn btn-primary mt-4" >
     </form>
 
 
@@ -54,8 +54,8 @@
         $reqUsernameVisteur->bindParam(':DateEmbauche', $DateEmbauche);
         $reqUsernameVisteur->execute();
         $result = $reqUsernameVisteur->fetchAll(PDO::FETCH_OBJ);
-        var_dump($result);
         if ($result == null) {
+            echo "</br>";
             echo "Mauvais Nom ou Mot de passe";
         } else {
 
@@ -65,8 +65,7 @@
             $_SESSION['matricule'] = ($result[0]->VIS_MATRICULE);
             $_SESSION['nom'] = ($result[0]->VIS_NOM);
             $_SESSION['prenom'] = ($result[0]->Vis_PRENOM);
-            
-            header("Location:Rendus.php");
+            header("Location:index.php");
         }
     }
 

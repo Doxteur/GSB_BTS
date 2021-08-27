@@ -2,6 +2,10 @@
 session_start();
 include('bddLogin.php');
 
+if(!isset($_SESSION['role'])){
+    $_SESSION['role'] = "null";
+}
+
 switch($_SESSION['role']){
     case "visiteur":
         require('templates/header.php');
