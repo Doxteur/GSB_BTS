@@ -55,7 +55,6 @@
 
         <?php
 
-    include("bddLogin.php");
 
     $reponse = $bdd->query('SELECT * FROM rapport_visite');
 
