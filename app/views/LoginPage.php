@@ -1,6 +1,6 @@
 
 
-    <form action="index.php" id="loginForm" method="POST" class="mx-4 mt-4">
+    <form action="" id="loginForm" method="POST" class="mx-4 mt-4">
         <label for="Username" class="form-label" >Username:</label>
         <input type="text" name="Username" class="form-control">
         <label for="Password" class="form-label">Password:</label>
@@ -65,7 +65,7 @@
             $_SESSION['matricule'] = ($result[0]->VIS_MATRICULE);
             $_SESSION['nom'] = ($result[0]->VIS_NOM);
             $_SESSION['prenom'] = ($result[0]->Vis_PRENOM);
-            header("Location:index.php");
+            header("Location:rapport");
         }
     }
 
