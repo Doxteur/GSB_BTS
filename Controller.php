@@ -2,12 +2,8 @@
 session_start();
 include('bddLogin.php');
 
-
-
-switch($uri){
+  switch($uri){
     case '/':
-        header('resources/css/LandingPage.css');
-
         include('app/views/LandingPage.php');
         break;
     case '/rapport':

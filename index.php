@@ -14,9 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS REF -->
     
-    <?php echo $uri=="/"?'':'<link rel="stylesheet" href="resources/css/LandingPage.css">'?>
-    <?php echo $uri=="login"?'':'<link rel="stylesheet" href="resources/css/login.css">'?>
-    <?php echo $uri=="rapport"?'':'<link rel="stylesheet" href="resources/css/VisiteurPage.css">'?>
+    <?php echo $uri!="/"?'':'<link rel="stylesheet" href="resources/css/LandingPage.css">'?>
+    <?php echo $uri!="/login"?'':'<link rel="stylesheet" href="resources/css/login.css">'?>
+    <?php echo $uri!="/rapport"?'':'<link rel="stylesheet" href="resources/css/VisiteurPage.css">'?>
     
     <!-- Boostrap Jquery / CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">

@@ -1,5 +1,4 @@
 <?php 
-var_dump($_SESSION['role']);
 if(isset($_SESSION['role'])){
     if($_SESSION['role'] == 'visiteur'){
         require('app/views/VisiteurPage.php');
