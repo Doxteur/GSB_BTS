@@ -11,7 +11,7 @@ $uri = "/" . $uri[2];
 
 switch($uri){
     case '/':
-        include('app/views/LoginPage.php');
+        include('app/views/LandingPage.php');
         break;
     case '/rapport':
         if(isset($_SESSION['role'])){
