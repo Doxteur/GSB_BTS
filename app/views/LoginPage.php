@@ -41,7 +41,7 @@ function formatDate($DateToFormat, $dateMonth, $DateEmbauche)
     <div>
         <form action="" id="loginForm" method="POST" class="mx-4 mt-4">
             <label for="Username" class="form-label">Nom:</label>
-            <input type="text" name="Username" class="form-control" placeholder="Jimmy">
+            <input type="text" name="Username" class="form-control" placeholder="Doussain">
             <label for="Password" class="form-label">Mot de passe:</label>
             <input type="password" name="Password" class="form-control" placeholder="24/apr/2001">
             <input id="buttonSeCo" type="submit" name="envoyer" value="Se Connecter" class="btn btn-primary mt-4">

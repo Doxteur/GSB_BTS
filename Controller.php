@@ -18,6 +18,9 @@ include('bddLogin.php');
             header('Location: login');
         }
         break;
+    case '/info':
+        require('app/models/InfoPersonnelleModel.php');
+        break;
     case '/login':
         require('app/views/LoginPage.php');
         break;
