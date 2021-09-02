@@ -15,6 +15,8 @@
     <!-- CSS REF -->
     
     <?php echo $uri!="/"?'':'<link rel="stylesheet" href="resources/css/LandingPage.css">'?>
+    <?php echo $uri!="/landing"?'':'<link rel="stylesheet" href="resources/css/LandingPage.css">'?>
+
     <?php echo $uri!="/login"?'':'<link rel="stylesheet" href="resources/css/login.css">'?>
     <?php echo $uri!="/rapport"?'':'<link rel="stylesheet" href="resources/css/VisiteurPage.css">'?>
     

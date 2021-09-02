@@ -1,5 +1,5 @@
 <div id="header">
-    <a href="index.php">
+    <a href="landing">
         <img src="resources/Images/logo_2.png" alt="" id="logo">
     </a>
     <div id="compteHeader">
